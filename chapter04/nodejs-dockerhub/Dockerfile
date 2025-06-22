@@ -13,8 +13,8 @@ RUN npm install
 # คัดลอกไฟล์ที่เหลือทั้งหมดไปยังโฟลเดอร์ /app ใน container
 COPY . .
 
-# เปิดพอร์ต 3000
-EXPOSE 3000
+# เปิดพอร์ต 3002
+EXPOSE 3002
 
 # คำสั่งรันแอป
 CMD ["npm", "start"]
