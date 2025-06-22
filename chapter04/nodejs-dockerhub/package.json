@@ -1,0 +1,12 @@
+{
+  "name": "simple-express-user-api",
+  "version": "1.0.0",
+  "description": "Simple Node.js + Express API to get all users",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
