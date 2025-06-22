@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps CI/CD Pipeline</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 800px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient 3s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .feature-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(45deg, #00c851, #28a745);
+            border-radius: 25px;
+            font-weight: bold;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 200, 81, 0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow: 0 5px 15px rgba(0, 200, 81, 0.3);
+            }
+            to {
+                box-shadow: 0 5px 25px rgba(0, 200, 81, 0.6);
+            }
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0.7;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            text-decoration: none;
+            color: white;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">CI</div>
+        
+        <h1>DevOps CI/CD Pipeline</h1>
+        
+        <p class="subtitle">
+            Automated deployment pipeline สำหรับ Node.js application<br>
+            พร้อมการ integration กับ GitLab และ Docker Hub
+        </p>
+        
+        <div class="status-badge">
+            🚀 Pipeline Ready
+        </div>
+        
+        <div class="features">
+            <div class="feature-card">
+                <span class="feature-icon">🔧</span>
+                <div class="feature-title">Jenkins Pipeline</div>
+                <div class="feature-desc">Automated CI/CD pipeline ที่ทำงานอัตโนมัติเมื่อมีการ commit ใหม่</div>
+            </div>
+            
+            <div class="feature-card">
+                <span class="feature-icon">🦊</span>
+                <div class="feature-title">GitLab Integration</div>
+                <div class="feature-desc">เชื่อมต่อกับ GitLab repository สำหรับ version control และ webhook</div>
+            </div>
+            
+            <div class="feature-card">
+                <span class="feature-icon">🐳</span>
+                <div class="feature-title">Docker Containerization</div>
+                <div class="feature-desc">สร้าง Docker image และ push ไปยัง Docker Hub อัตโนมัติ</div>
+            </div>
+            
+            <div class="feature-card">
+                <span class="feature-icon">⚡</span>
+                <div class="feature-title">Fast Deployment</div>
+                <div class="feature-desc">Deploy application ได้อย่างรวดเร็วและเชื่อถือได้</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Built with ❤️ using Jenkins, GitLab & Docker</p>
+            <div class="social-links">
+                <a href="#" class="social-link" title="GitHub">🐙</a>
+                <a href="#" class="social-link" title="GitLab">🦊</a>
+                <a href="#" class="social-link" title="Docker">🐳</a>
+                <a href="#" class="social-link" title="Jenkins">🔧</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // เพิ่ม interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.feature-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-5px)';
+                    }, 100);
+                });
+            });
+
+            // แสดงข้อมูล build เมื่อคลิกที่ status badge
+            const statusBadge = document.querySelector('.status-badge');
+            statusBadge.addEventListener('click', function() {
+                const buildInfo = `
+                    Build Information:
+                    - Build Time: ${new Date().toLocaleString('th-TH')}
+                    - Status: Success ✅
+                    - Environment: Production
+                    - Version: ${Math.floor(Math.random() * 100) + 1}
+                `;
+                alert(buildInfo);
+            });
+        });
+    </script>
+</body>
+</html>
